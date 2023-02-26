@@ -1,0 +1,47 @@
+.work {
+  background-color: #778899;
+  height: 9080px;
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  .work-left {
+    position: absolute;
+    height: 50%;
+    width: 50%;
+    color: #fff;
+
+    &.fixed {
+      position: fixed;
+      left: 0;
+      bottom: 0;
+      right: 50%;
+      width: 50%;
+      height: 100% !important;
+    }
+    .static-content {
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 100%;
+      .content {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin: auto 0;
+      }
+    }
+  }
+  .work-right {
+    position: absolute;
+    height: 50%;
+    width: 100%;
+    color: #fff;
+    .work-case {
+      height: 100vh;
+      background-color: rgb(153, 202, 73);
+      width: 100%;
+      transform: translate(50%);
+    }
+  }
+}

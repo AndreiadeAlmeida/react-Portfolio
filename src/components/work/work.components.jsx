@@ -1,19 +1,26 @@
 import React, { useState, useEffect } from "react";
 import workImage from "../../assets/img/work.png";
+import img1 from "../../assets/img/img1.jpeg";
 import "./work.styles.scss";
 
 const Work = () => {
   const [isFixed, setIsFixed] = useState(false);
   const [componentHeight, setComponentHeight] = useState(false);
+  const [workHeight, setWorkHeight] = useState(false);
+
+  const handleScroll = () => {
+    const element = document.getElementById("work");
+    const rect = element.getBoundingClientRect();
+
+    if (rect.top <= 0) {
+      setIsFixed(true);
+    } else {
+      setIsFixed(false);
+    }
+  };
 
   useEffect(() => {
-    const handleScroll = () => {
-      const element = document.getElementById("work-left");
-      const rect = element.getBoundingClientRect();
-      setIsFixed(rect.top <= 0);
-    };
     window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   useEffect(() => {
@@ -23,18 +30,18 @@ const Work = () => {
         workRightElement && workRightElement.querySelectorAll(".work-case");
       setComponentHeight(
         Array.from(workCaseElements).reduce((acc, el) => {
+          setWorkHeight(el.getBoundingClientRect().height);
           return acc + el.getBoundingClientRect().height;
         }, 0)
       );
     };
 
+    console.log(workHeight);
     calculateHeight();
   });
 
-  console.log(componentHeight);
-
   return (
-    <div className="work" id="work">
+    <div className="work">
       <div className={`work-left ${isFixed ? "fixed" : ""}`} id="work-left">
         <div className="content">
           <h1>Work</h1>
@@ -51,8 +58,19 @@ const Work = () => {
           <img src={workImage} alt="Work computer" />
         </div>
       </div>
-      <div className="work-right" style={{ height: componentHeight }}>
-        <div className="work-case"></div>
+      <div className="work-right" id="work" style={{ height: componentHeight }}>
+        <div className="work-case">
+          <div className="work-case-container">
+            <div
+              className="work-case-left"
+              style={{
+                backgroundImage: `url(${img1})`,
+                height: workHeight,
+              }}
+            ></div>
+            <div className="work-case-right">Description</div>
+          </div>
+        </div>
         <div className="work-case" style={{ backgroundColor: "#ffffff" }}></div>
         <div className="work-case"></div>
         <div className="work-case"></div>

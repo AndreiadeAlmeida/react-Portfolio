@@ -4,6 +4,7 @@
   position: relative;
   overflow: hidden;
   width: 100%;
+
   .work-left {
     position: absolute;
     height: 50%;
@@ -18,20 +19,20 @@
       width: 50%;
       height: 100% !important;
     }
-    .static-content {
-      position: absolute;
-      left: 0;
-      bottom: 0;
-      width: 100%;
-      .content {
-        width: 100%;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        margin: auto 0;
+    .content {
+      padding: 7rem;
+      text-align: center;
+
+      h1 {
+        font-weight: bold;
+      }
+      p {
+        padding-top: 4rem;
+        padding-bottom: 4rem;
       }
     }
   }
+
   .work-right {
     position: absolute;
     height: 50%;
@@ -42,6 +43,19 @@
       background-color: rgb(153, 202, 73);
       width: 100%;
       transform: translate(50%);
+
+      .work-case-container {
+        display: flex;
+        .work-case-left {
+          width: 50%;
+          background-position: center;
+          background-repeat: no-repeat;
+          background-size: cover;
+        }
+        .work-case-right {
+          width: 50%;
+        }
+      }
     }
   }
 }

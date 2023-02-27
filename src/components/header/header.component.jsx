@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import "./header.styles.scss";
 
+import arrow from "../../assets/img/arrow.svg";
+
 const Header = () => {
   const [isHeaderVisible, setIsHeaderVisible] = useState(false);
 
@@ -21,6 +23,9 @@ const Header = () => {
         </div>
         <div className="header-slogan">
           <h3>Frontend developer</h3>
+        </div>
+        <div>
+          <img src={arrow} alt="arrow" />
         </div>
       </div>
     </div>

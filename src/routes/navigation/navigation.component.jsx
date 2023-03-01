@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from "react";
+import { Link as RouterLink } from "react-router-dom";
+import { Link as ScrollLink, Element } from "react-scroll";
 
 import "./navigation.styles.scss";
 
@@ -16,9 +18,25 @@ const Navigation = () => {
         {"<AA/>"}
       </a>
       <div className={`nav-links-container ${isMenuOpen ? "is-open" : ""}`}>
-        <div className="nav-link">About</div>
-        <div className="nav-link">Work</div>
-        <div className="nav-link">Contact</div>
+        <ScrollLink
+          to="about"
+          smooth={true}
+          duration={500}
+          className="nav-link"
+        >
+          About
+        </ScrollLink>
+        <ScrollLink to="work" smooth={true} duration={500} className="nav-link">
+          Work
+        </ScrollLink>
+        <ScrollLink
+          to="contact"
+          smooth={true}
+          duration={500}
+          className="nav-link"
+        >
+          Contact
+        </ScrollLink>
       </div>
       <div onClick={handleMenuClick} className="nav-links-burger">
         <div className="nav-burger burger-1"></div>

@@ -1,16 +1,14 @@
 import React from 'react';
-import About from './components/about/about.component';
-import Header from './components/header/header.component';
-import Work from './components/work/work.components';
-import Navigation from './routes/navigation/navigation.component';
+import { Routes, Route } from "react-router-dom"
+
+import Home from './pages/homepage/homepage.component';
 
 function App() {
   return (
-    <div className="App">
-      <Navigation />
-      <Header />
-      <About />
-      <Work />
+    <div className="App"> 
+      <Routes>
+        <Route path="/" element={ <Home/> } />
+      </Routes>
     </div>
   );
 }

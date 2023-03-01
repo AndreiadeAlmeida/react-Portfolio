@@ -1,7 +1,11 @@
 import React, { useState, useEffect } from "react";
+import { Element } from "react-scroll";
+import gsap from "gsap";
+
 import workImage from "../../assets/img/work.png";
 import img1 from "../../assets/img/img1.jpeg";
 import "./work.styles.scss";
+import ExpandFullScreen from "../expandFullScreen/expandFullScreen.component";
 
 const Work = () => {
   const [isFixed, setIsFixed] = useState(false);
@@ -41,42 +45,46 @@ const Work = () => {
   });
 
   return (
-    <div className="work">
-      <div className={`work-left ${isFixed ? "fixed" : ""}`} id="work-left">
-        <div className="content">
-          <h1>Work</h1>
-          <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi massa
-            erat, mollis sed ornare non, rutrum viverra quam. Nullam nibh
-            mauris, maximus a pharetra eu, feugiat sed nisl. Donec nisi justo,
-            posuere at sem ornare, eleifend facilisis libero. Quisque dignissim
-            tortor ac fermentum euismod. Mauris neque ipsum, laoreet eget risus
-            nec, faucibus cursus purus. Vestibulum auctor, nulla at facilisis
-            tempor, nunc nulla elementum sem, at aliquam elit augue sit amet
-            augue.{" "}
-          </p>
-          <img src={workImage} alt="Work computer" />
-        </div>
-      </div>
-      <div className="work-right" id="work" style={{ height: componentHeight }}>
-        <div className="work-case">
-          <div className="work-case-container">
-            <div
-              className="work-case-left"
-              style={{
-                backgroundImage: `url(${img1})`,
-                height: workHeight,
-              }}
-            ></div>
-            <div className="work-case-right">Description</div>
+    <Element name="work">
+      <div className="work">
+        <div className={`work-left ${isFixed ? "fixed" : ""}`} id="work-left">
+          <div className="content">
+            <h1>Work</h1>
+            <p>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi
+              massa erat, mollis sed ornare non, rutrum viverra quam. Nullam
+              nibh mauris, maximus a pharetra eu, feugiat sed nisl. Donec nisi
+              justo, posuere at sem ornare, eleifend facilisis libero. Quisque
+              dignissim tortor ac fermentum euismod. Mauris neque ipsum, laoreet
+              eget risus nec, faucibus cursus purus. Vestibulum auctor, nulla at
+              facilisis tempor, nunc nulla elementum sem, at aliquam elit augue
+              sit amet augue.{" "}
+            </p>
+            <img src={workImage} alt="Work computer" />
           </div>
         </div>
-        <div className="work-case" style={{ backgroundColor: "#ffffff" }}></div>
-        <div className="work-case"></div>
-        <div className="work-case"></div>
-        <div className="work-case"></div>
+        <div
+          className="work-right"
+          id="work"
+          style={{ height: componentHeight }}
+        >
+          <div className="work-case">
+            <ExpandFullScreen>
+              <div className="work-case-container">
+                <div
+                  className="work-case-left"
+                  style={{
+                    backgroundImage: `url(${img1})`,
+                    height: workHeight,
+                  }}
+                ></div>
+                <div className="work-case-right">Description</div>
+              </div>
+            </ExpandFullScreen>
+          </div>
+        </div>
       </div>
-    </div>
+    </Element>
   );
 };
 

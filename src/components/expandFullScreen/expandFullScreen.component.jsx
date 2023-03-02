@@ -1,38 +1,48 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState, useLayoutEffect } from "react";
 import { gsap } from "gsap";
 
-const ExpandFullScreen = ({ children }) => {
-  const containerRef = useRef(null);
+const ExpandFullScreen = ({ children, className }) => {
+  const componentRef = useRef(null);
+  const [viewportSize, setViewportSize] = useState({ width: 0, height: 0 });
 
   useEffect(() => {
-    gsap.set(containerRef.current, {
-      position: "fixed",
-      top: 0,
-      left: 0,
-      width: "100%",
-      height: "100%",
-      overflow: "hidden",
-      zIndex: 99999,
+    gsap.set(componentRef.current, {
+      height: "100vh",
+      zIndex: 999,
     });
   }, []);
 
   const handleClick = () => {
-    gsap.to(containerRef.current, {
-      duration: 0.5,
-      width: "100%",
-      height: "100%",
+    gsap.to(componentRef.current, { duration: 1, width: "100%", x: "-50vw" });
+  };
+  useLayoutEffect(() => {
+    const handleResize = () => {
+      setViewportSize({ width: window.innerWidth, height: window.innerHeight });
+    };
+    handleResize();
+
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
+  useEffect(() => {
+    gsap.to(componentRef.current, {
+      duration: 1,
+      height: viewportSize.height,
+      width: viewportSize.width,
       onComplete: () => {
-        gsap.to(containerRef.current, {
-          duration: 0.5,
-          x: "-50%",
-          position: 'fixed';
-        });
+        console.log("animation complete");
       },
     });
-  };
+  }, [viewportSize]);
+
+  console.log(viewportSize);
 
   return (
-    <div ref={containerRef} onClick={handleClick}>
+    <div className={className} ref={componentRef} onClick={handleClick}>
       {children}
     </div>
   );

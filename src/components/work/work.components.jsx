@@ -28,10 +28,11 @@ const Work = () => {
   }, []);
 
   useEffect(() => {
-    const workRightElement = document.querySelector(".work-right");
+    const workRightElement = document.querySelector(".right-section");
     const calculateHeight = () => {
       const workCaseElements =
-        workRightElement && workRightElement.querySelectorAll(".work-case");
+        workRightElement &&
+        workRightElement.querySelectorAll(".right-section-content");
       setComponentHeight(
         Array.from(workCaseElements).reduce((acc, el) => {
           setWorkHeight(el.getBoundingClientRect().height);
@@ -40,14 +41,17 @@ const Work = () => {
       );
     };
 
-    console.log(workHeight);
     calculateHeight();
-  });
+  }, []);
 
+  console.log(componentHeight);
   return (
-    <Element name="work">
-      <div className="work">
-        <div className={`work-left ${isFixed ? "fixed" : ""}`} id="work-left">
+    <Element name="work" style={{ height: componentHeight }}>
+      <div className="work-section">
+        <div
+          className={`left-section ${isFixed ? "fixed" : ""}`}
+          id="work-left"
+        >
           <div className="content">
             <h1>Work</h1>
             <p>
@@ -64,24 +68,28 @@ const Work = () => {
           </div>
         </div>
         <div
-          className="work-right"
+          className="right-section"
           id="work"
           style={{ height: componentHeight }}
         >
-          <div className="work-case">
-            <ExpandFullScreen>
-              <div className="work-case-container">
-                <div
-                  className="work-case-left"
-                  style={{
-                    backgroundImage: `url(${img1})`,
-                    height: workHeight,
-                  }}
-                ></div>
-                <div className="work-case-right">Description</div>
-              </div>
-            </ExpandFullScreen>
-          </div>
+          <ExpandFullScreen className="right-section-content">
+            <div
+              className="content-img"
+              style={{
+                backgroundImage: `url(${img1})`,
+                height: "100vh",
+              }}
+            ></div>
+          </ExpandFullScreen>
+          <ExpandFullScreen className="right-section-content">
+            <div
+              className="content-img"
+              style={{
+                backgroundImage: `url(${img1})`,
+                height: "100vh",
+              }}
+            ></div>
+          </ExpandFullScreen>
         </div>
       </div>
     </Element>

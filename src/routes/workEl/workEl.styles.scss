@@ -1,75 +1,78 @@
 #scrollContainer {
-  position: relative;
-
-  .scrollContainer-close {
-    position: fixed;
-    top: 0;
-    right: 0;
-    background-color: white;
-    z-index: 500;
-  }
-
+  width: 300%;
   .work-component {
     height: 100vh;
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
-    flex-direction: row;
+    -ms-flex-wrap: nowrap;
+    flex-wrap: nowrap;
+    padding: 0;
+    overflow: hidden;
+    background-color: #ddd;
 
-    .panel {
-      width: 100vw;
+    .full-screen {
+      display: block;
+      width: 100%;
       height: 100vh;
       overflow: hidden;
     }
-
-    .work-img {
-      background-position: center;
-      background-size: cover;
-      background-repeat: no-repeat;
-    }
-
-    .work-info {
+    .panel {
+      position: relative;
+      width: 100%;
+      height: 100vh;
+      overflow: hidden;
+      display: -webkit-box;
+      display: -ms-flexbox;
       display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      background-color: white;
-      padding: 50px;
+      color: #333;
     }
 
-    .top-copy {
-      margin-bottom: 50px;
-      text-align: center;
+    .work-general {
+      display: flex;
+      .work-img {
+        width: 50%;
+        background-size: cover;
+      }
+      .work-info {
+        width: 50%;
+        .work-info-component {
+          padding: 4rem;
+          .top-copy {
+            margin-bottom: 50px;
+            p {
+              margin-bottom: 10px;
+              font-size: 16px;
+              line-height: 22px;
+              font-weight: bold;
+              color: #333;
+            }
+          }
+          .middle-copy {
+            text-align: justify;
 
-      p {
-        margin-bottom: 10px;
-        font-size: 16px;
-        font-weight: bold;
-        color: #333;
+            h1 {
+              margin-bottom: 30px;
+              font-size: 42px;
+              font-weight: bold;
+              color: #333;
+            }
+
+            p {
+              font-size: 18px;
+              line-height: 1.5;
+              color: #333;
+            }
+          }
+        }
       }
     }
-
-    .middle-copy {
-      text-align: justify;
-
-      h1 {
-        margin-bottom: 30px;
-        font-size: 42px;
-        font-weight: bold;
-        color: #333;
-      }
-
-      p {
-        font-size: 18px;
-        line-height: 1.5;
-        color: #333;
-      }
-    }
-
     .work-video {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      background-color: black;
-      padding: 50px;
+      background-color: red;
+    }
+    .work-image {
+      background-size: cover;
+      position: center;
     }
   }
 }

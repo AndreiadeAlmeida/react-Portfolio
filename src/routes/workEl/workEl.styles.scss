@@ -1,5 +1,11 @@
 #scrollContainer {
   width: 300%;
+
+  // position: fixed;
+  // overflow-y: scroll;
+  // top: 0;
+  // left: 0;
+  z-index: 999;
   .work-component {
     height: 100vh;
     display: -webkit-box;

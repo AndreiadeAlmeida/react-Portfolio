@@ -11,26 +11,6 @@ gsap.registerPlugin(ScrollTrigger);
 gsap.registerPlugin(ScrollToPlugin);
 
 const WorkEl = () => {
-  // useEffect(() => {
-  //   let sections = gsap.utils.toArray(".panel");
-  //   const container = document.getElementById("scrollContainer");
-  //   gsap.to(sections, {
-  //     // xPercent: -100 * (sections.length - 1),
-  //     x: () =>
-  //       -(container.scrollWidth - document.documentElement.clientWidth) + "px",
-  //     ease: "none",
-  //     scrollTrigger: {
-  //       trigger: ".work-component",
-  //       scroller: "#scrollContainer",
-  //       pin: true,
-  //       scrub: 1,
-  //       // snap: 1 / (sections.length - 1),
-  //       // base vertical scrolling on how wide the container is so it feels more natural.
-
-  //       end: () => "+=" + container.offsetWidth,
-  //     },
-  //   });
-  // });
   const innerWidth = window.innerWidth;
 
   useEffect(() => {
@@ -38,8 +18,6 @@ const WorkEl = () => {
     const panels = gsap.utils.toArray(".work-component .panel");
     let tween;
 
-    console.log(panelsContainer.offsetWidth);
-    console.log(innerWidth);
     tween = gsap.to(panels, {
       xPercent: -100 * (panels.length - 1),
       ease: "none",
@@ -61,7 +39,7 @@ const WorkEl = () => {
           <div
             className="work-img"
             style={{
-              backgroundImage: `url(${img1})`,
+              backgroundImage: `url(${img1})`, 
               height: "100vh",
             }}
           ></div>

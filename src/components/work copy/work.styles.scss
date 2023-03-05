@@ -46,40 +46,6 @@
   }
 }
 
-.modal {
-  position: relative;
-  .modal-close {
-    position: fixed;
-    right: 10px;
-    top: 10px;
-    font-size: 4rem;
-    cursor: pointer;
-    z-index: 99;
-  }
-  .modal-container {
-    background-color: #778899;
-    overflow: auto;
-    width: 100%;
-    height: 100vh;
-    position: absolute;
-    //   .modal-section1 {
-    //     display: flex;
-    //     flex: 1 1 0px;
-    //     .work-img {
-    //       width: 50%;
-    //       background-position: center;
-    //       background-repeat: no-repeat;
-    //       background-size: cover;
-    //     }
-    //     .work-info {
-    //       width: 50%;
-    //     }
-    //   }
-    //   .modal-section2 {
-    //     width: 50%;
-    //     background-position: center;
-    //     background-repeat: no-repeat;
-    //     background-size: cover;
-    //   }
-  }
+.modal-bkg {
+  // position: fixed;
 }

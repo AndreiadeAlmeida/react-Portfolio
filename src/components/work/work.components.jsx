@@ -1,56 +1,96 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Element } from "react-scroll";
 import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { ScrollToPlugin } from "gsap/ScrollToPlugin";
 
+// Import IMAGES
 import workImage from "../../assets/img/work.png";
 import img1 from "../../assets/img/img1.jpeg";
+
 import "./work.styles.scss";
-import ExpandFullScreen from "../expandFullScreen/expandFullScreen.component";
+
+gsap.registerPlugin(ScrollTrigger);
+gsap.registerPlugin(ScrollToPlugin);
 
 const Work = () => {
-  const [isFixed, setIsFixed] = useState(false);
-  const [componentHeight, setComponentHeight] = useState(false);
-  const [workHeight, setWorkHeight] = useState(false);
+  const [modalOpen, setModalOpen] = useState(false);
+  const [fixedComponent, setFixedComponent] = useState(false);
+  const [modalPosition, setModalPosition] = useState({});
+  const rightSectionRef = useRef(null);
+  const leftSectionRef = useRef(null);
+  const workComponent = useRef(null);
+  const body = document.body;
+  let modalTop;
 
   const handleScroll = () => {
-    const element = document.getElementById("work");
-    const rect = element.getBoundingClientRect();
+    const workComponentTop = workComponent.current.getBoundingClientRect().top;
+    return workComponentTop <= 0
+      ? setFixedComponent(true)
+      : setFixedComponent(false);
+  };
 
-    if (rect.top <= 0) {
-      setIsFixed(true);
+  const scrollToTop = (id) => {
+    gsap.to(window, {
+      duration: 0.5,
+      scrollTo: `#${id}`,
+      ease: "power2.inOut",
+    });
+  };
+
+  const handleButtonClick = (e) => {
+    if (!document.querySelector(".left-section").classList.contains("fixed")) {
+      window.scrollTo({
+        top: workComponent.current.offsetTop,
+      });
+      setFixedComponent(true);
     } else {
-      setIsFixed(false);
+      scrollToTop(e.target.id);
     }
+
+    modalTop = e.target.getBoundingClientRect().top;
+    body.classList.add("modal-open");
+    setModalOpen(true);
+  };
+
+  const handleButtonClose = (e) => {
+    e.preventDefault();
+    body.classList.remove("modal-open");
+    setModalOpen(false);
   };
 
   useEffect(() => {
     window.addEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
   }, []);
 
   useEffect(() => {
-    const workRightElement = document.querySelector(".right-section");
-    const calculateHeight = () => {
-      const workCaseElements =
-        workRightElement &&
-        workRightElement.querySelectorAll(".right-section-content");
-      setComponentHeight(
-        Array.from(workCaseElements).reduce((acc, el) => {
-          setWorkHeight(el.getBoundingClientRect().height);
-          return acc + el.getBoundingClientRect().height;
-        }, 0)
-      );
-    };
+    const modal = document.querySelector(".modal");
+    if (modalOpen) {
+      gsap.from(modal, {
+        duration: 0.75,
+        x: "50%",
+        position: "absolute",
+        height: "100vh",
+        width: "100vw",
+        top: modalTop,
+        left: 0,
+      });
+    }
 
-    calculateHeight();
-  }, []);
+    console.log(modalPosition.top);
+    console.log(workComponent.current.getBoundingClientRect().top);
+  });
 
-  console.log(componentHeight);
   return (
-    <Element name="work" style={{ height: componentHeight }}>
-      <div className="work-section">
+    <Element name="work">
+      <div className="work-section" ref={workComponent}>
         <div
-          className={`left-section ${isFixed ? "fixed" : ""}`}
+          className={`left-section ${fixedComponent ? "fixed" : null}`}
           id="work-left"
+          ref={leftSectionRef}
         >
           <div className="content">
             <h1>Work</h1>
@@ -67,31 +107,39 @@ const Work = () => {
             <img src={workImage} alt="Work computer" />
           </div>
         </div>
-        <div
-          className="right-section"
-          id="work"
-          style={{ height: componentHeight }}
-        >
-          <ExpandFullScreen className="right-section-content">
-            <div
-              className="content-img"
-              style={{
-                backgroundImage: `url(${img1})`,
-                height: "100vh",
-              }}
-            ></div>
-          </ExpandFullScreen>
-          <ExpandFullScreen className="right-section-content">
-            <div
-              className="content-img"
-              style={{
-                backgroundImage: `url(${img1})`,
-                height: "100vh",
-              }}
-            ></div>
-          </ExpandFullScreen>
+        <div className="right-section" id="work" ref={rightSectionRef}>
+          <div
+            onClick={handleButtonClick}
+            id="img1"
+            className="content-img"
+            style={{
+              backgroundImage: `url(${img1})`,
+              height: "100vh",
+            }}
+          ></div>
+          <div
+            onClick={handleButtonClick}
+            id="img2"
+            className="content-img"
+            style={{
+              backgroundImage: `url(${img1})`,
+              height: "100vh",
+            }}
+          ></div>
         </div>
       </div>
+
+      
+      {modalOpen && (
+        <div className="modal">
+          <div className="modal-close" onClick={handleButtonClose}>
+            x
+          </div>
+          <div className="modal-container">
+            <p>hello world</p>
+          </div>
+        </div>
+      )}
     </Element>
   );
 };

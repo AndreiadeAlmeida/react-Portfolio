@@ -10,6 +10,12 @@ body {
   -moz-osx-font-smoothing: grayscale;
   font-size: 16px;
 }
+body.modal-open {
+  overflow-y: hidden;
+}
+html.modal-open {
+  overflow-y: hidden;
+}
 
 h1 {
   font-size: 3.5rem;
